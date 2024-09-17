@@ -30,4 +30,30 @@ class Medicamento {
       throw Exception("Quantidade não pode ser negativa");
     }
   }
+
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'nome': nome,
+      'quantidade': quantidade,
+      'data_de_compra':
+          data_de_compra.toIso8601String(), 
+      'data_de_validade':
+          data_de_validade.toIso8601String(), 
+      'quantidade_minima': quantidade_minima,
+    };
+  }
+
+
+  factory Medicamento.fromMap(Map<String, dynamic> map) {
+    return Medicamento(
+      id: map['id'],
+      nome: map['nome'],
+      quantidade: map['quantidade'],
+      data_de_compra: DateTime.parse(map['data_de_compra']),
+      data_de_validade: DateTime.parse(map['data_de_validade']),
+      quantidade_minima: map['quantidade_minima'],
+    );
+  }
 }

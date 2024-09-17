@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class Animal {
   late dynamic id;
   late String nome;

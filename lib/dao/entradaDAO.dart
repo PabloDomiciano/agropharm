@@ -1,21 +1,22 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:pharm_application/dominio/entrada.dart';
 import 'package:pharm_application/db_helper.dart';
+import 'package:pharm_application/idao/entradaIDAO.dart';
 
-class EntradaDAO {
+class EntradaDAO implements EntradaIDAO {
   final DBHelper dbHelper = DBHelper();
 
-
+  @override
   Future<int> insertEntrada(Entrada entrada) async {
     final db = await dbHelper.database;
     return await db.insert(
-      'entradas', 
+      'entradas',
       entrada.toMap(),
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
   }
 
-
+  @override
   Future<List<Entrada>> getEntradas() async {
     final db = await dbHelper.database;
     final List<Map<String, dynamic>> maps = await db.query('entradas');
@@ -25,7 +26,7 @@ class EntradaDAO {
     });
   }
 
-
+  @override
   Future<int> updateEntrada(Entrada entrada) async {
     final db = await dbHelper.database;
     return await db.update(
@@ -36,7 +37,7 @@ class EntradaDAO {
     );
   }
 
- 
+  @override
   Future<int> deleteEntrada(int id) async {
     final db = await dbHelper.database;
     return await db.delete(
@@ -46,7 +47,7 @@ class EntradaDAO {
     );
   }
 
- 
+  @override
   Future<Entrada?> getEntradaById(int id) async {
     final db = await dbHelper.database;
     final List<Map<String, dynamic>> maps = await db.query(
@@ -58,7 +59,7 @@ class EntradaDAO {
     if (maps.isNotEmpty) {
       return Entrada.fromMap(maps.first);
     } else {
-      return null; 
+      return null;
     }
   }
 }

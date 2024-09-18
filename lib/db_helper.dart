@@ -4,6 +4,7 @@ import 'package:pharm_application/dominio/entrada.dart';
 import 'package:pharm_application/dominio/medicamento.dart';
 
 class DBHelper {
+  
   static Database? _database;
 
   Future<Database> get database async {

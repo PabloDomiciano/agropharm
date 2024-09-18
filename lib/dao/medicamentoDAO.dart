@@ -1,11 +1,13 @@
 import 'package:sqflite/sqflite.dart';
-import 'package:pharm_application/dominio/medicamento.dart'; 
+import 'package:pharm_application/dominio/medicamento.dart';
+import 'package:pharm_application/idao/MedicamentoIDAO.dart';
 
-class MedicamentoDAO {
+class MedicamentoDAO implements MedicamentoIDAO {
   final Database db;
 
   MedicamentoDAO(this.db);
 
+  @override
   Future<void> inserirMedicamento(Medicamento medicamento) async {
     await db.insert(
       'medicamentos',
@@ -14,7 +16,7 @@ class MedicamentoDAO {
     );
   }
 
-
+  @override
   Future<List<Medicamento>> listarMedicamentos() async {
     final List<Map<String, dynamic>> maps = await db.query('medicamentos');
 
@@ -30,7 +32,7 @@ class MedicamentoDAO {
     });
   }
 
-
+  @override
   Future<void> atualizarMedicamento(Medicamento medicamento) async {
     await db.update(
       'medicamentos',
@@ -40,7 +42,7 @@ class MedicamentoDAO {
     );
   }
 
-
+  @override
   Future<void> deletarMedicamento(int id) async {
     await db.delete(
       'medicamentos',
